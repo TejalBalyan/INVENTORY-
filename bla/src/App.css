@@ -1,0 +1,710 @@
+/* src/App.css */
+@import url('https://fonts.googleapis.com/css2?family=Londrina+Sketch&display=swap');
+
+/* General App layout */
+body {
+  font-family: 'Josefin Sans', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  position: relative;
+  min-height: 100vh;
+  color: white;
+  overflow: hidden; /* Prevent scrollbars from appearing due to background animation */
+}
+.londrina-sketch-regular {
+  font-family: "Londrina Sketch", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.page-title {
+  font-size: 4.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  margin: 20px 0;
+  font-family: 'Londrina Sketch', sans-serif; /* Correct font usage */
+  z-index: 100;
+}
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 3.5rem;}
+}
+
+
+/* Container for main content */
+.container-fluid {
+  position: relative; /* Establish a new stacking context */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: transparent; /* Make background transparent to see animated background */
+  z-index: 2; /* Ensure content is above the animated background */
+}
+
+/* Animation background */
+.background {
+  /* background: linear-gradient(132deg, #FC415A, #591BC5, #212335); */
+  /* background: linear-gradient(132deg, #212335, #41e0e0, #e30b5c); */
+  
+    background: url('./back.jpg') no-repeat center center fixed;
+    background-size: cover;
+  
+  
+  /* background-size: 400% 400%; */
+  animation: Gradient 15s ease infinite;
+  position: fixed; /* Fix the background relative to the viewport */
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1; /* Ensure background is behind content */
+  pointer-events: none; /* Allow clicks to pass through */
+}
+
+.playfair-display-uniquifier {
+  font-family: "Playfair Display", serif;
+  font-weight: 800; /* Adjust weight as needed */
+  font-size: 3rem; /* Adjust size as needed */
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  margin: 10px;
+  color: white;
+  z-index: 3; /* Ensure it's above other elements */
+}
+
+/* Cube animation */
+.cube {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: solid 1px #D7D4E4;
+  transform-origin: top left;
+  transform: scale(0) rotate(0deg) translate(-50%, -50%);
+  animation: cube 12s ease-in forwards infinite;
+}
+
+.cube:nth-child(2n) {
+  border-color: #FFF;
+}
+
+.cube:nth-child(2) {
+  animation-delay: 2s;
+  left: 25vw;
+  top: 40vh;
+}
+
+.cube:nth-child(3) {
+  animation-delay: 4s;
+  left: 75vw;
+  top: 50vh;
+}
+
+.cube:nth-child(4) {
+  animation-delay: 6s;
+  left: 90vw;
+  top: 10vh;
+}
+
+.cube:nth-child(5) {
+  animation-delay: 8s;
+  left: 10vw;
+  top: 85vh;
+}
+
+.cube:nth-child(6) {
+  animation-delay: 10s;
+  left: 50vw;
+  top: 10vh;
+}
+
+/* Header styling */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 3; /* Ensure header is above all */
+}
+
+/* Navbar */
+nav {
+  color: #FFF;
+  float: right;
+  margin: 30px 90px;
+  z-index: 3; /* Ensure navbar is above all */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  float: left;
+  transition: 0.3s;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #EFEEF5;
+  transition: 0.5s;
+  font-size: 15px;
+  margin-left: 16px;
+  padding: 5px 10px; /* Add padding for better click area */
+}
+
+nav ul li:hover a {
+  text-decoration: none;
+  color: #591BC5;
+}
+
+nav ul li:hover {
+  height: 45px;
+  padding-top: 30px;
+  margin-top: -30px;
+  background: #EFEEF5;
+  text-decoration: none;
+  transform: skew(15deg);
+}
+
+/* Logo */
+.logo {
+  width: 35px;
+  height: 35px;
+  background: #EFEEF5;
+  margin: 40px 63px;
+  float: left;
+  transform: rotate(-30deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo span {
+  color: #591BC5;
+  font-size: 2em;
+  line-height: 1.4;
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+/* Header content & title & button */
+.header-content {
+  margin-top: 25%;
+  text-align: center;
+  color: #EFEEF5;
+  z-index: 3; /* Ensure header content is above background */
+}
+
+.header-content h1 {
+  text-transform: uppercase;
+  font-size: 3em;
+  letter-spacing: 1px;
+}
+
+.header-content p {
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 20px auto;
+}
+
+.header-content button {
+  width: 140px;
+  margin: 20px 10px;
+  color: #591BC5;
+  font-size: 17px;
+  border: 1px solid #EFEEF5;
+  font-weight: 500;
+  background: #EFEEF5;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header-content button:hover {
+  border-radius: 0;
+}
+
+/* Navbar Close Button */
+.navbar-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 30px; /* Adjust size as needed */
+  height: 30px;
+}
+
+/* Resize the close icon to 1/8 of its original size */
+.close-icon {
+  width: 30px; /* 1/8 of 240px, adjust based on actual size */
+  height: auto;
+}
+
+/* Navbar styling */
+.navbar {
+  background-color: black;
+  color: white;
+  padding: 20px;
+  width: 300px;
+  position: fixed;
+  top: 70px;
+  right: 0;
+  height: 100vh;
+  overflow-y: auto;
+  transform: translateX(100%); /* Initially hide navbar off-screen */
+  transition: transform 0.3s ease-in-out; /* Add transition for smooth opening/closing */
+  z-index: 4; /* Ensure navbar is above everything else */
+}
+
+.navbar.open {
+  transform: translateX(0); /* Move navbar to the left to reveal content */
+}
+
+/* TreeView items styling */
+.tree-item {
+  padding: 10px;
+  cursor: pointer;
+  margin: 5px 0;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.tree-item:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tree-item:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.tree-item:hover {
+  color: lightblue;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Search and Filter UI */
+/* .search-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 3; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  position: relative; 
+} */
+
+/* .search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex: 1;
+  max-width: 300px;
+  background-color: rgba(255, 255, 255, 0.8); 
+  color: #333; 
+} */
+
+.filter-select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.8); /* Light background for visibility */
+  color: #333; /* Dark text for contrast */
+}
+
+/* Search Results */
+.search-results-dropdown {
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  /* background-color: white; */
+  position: absolute; /* Position it relative to the search input */
+  z-index: 1000; /* Ensure it's above other content */
+  width: 100%; /* Make it the same width as the input */
+  background-color: rgba(255,255,255,0.9); /* Light background */
+  color: black; /* Dark text */
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Item detail styling */
+/*.item-detail {
+  /* align-items: left !important; */
+  /* align-items: center; */
+  /* margin-right: 200000px !important; */
+  /* width: 200%; */
+  /* margin-left: 50px; */
+  /* padding: 20px;
+  
+  color: black;
+  border-radius: 10px;
+  background-color: transparent;
+  z-index: 2; 
+  transition: opacity 0.3s ease-in-out;
+  margin-right: 2000px; */
+
+
+/* .item-detail.hidden {
+  display: none;
+} */
+
+/* Toggle button */
+/* .toggle-button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  margin-left: auto;
+} */
+
+.content {
+  width: 50%;  /* Adjust width to 50% for smaller display */
+  height: auto; /* Keep height auto-adjustable or specify a value like '500px' */
+  margin: 0 auto;  /* Centers the content horizontally */
+  padding: 15px;
+  background-color: transparent; /* Optional background color */
+  border-radius: 10px;
+}
+
+/* Header Content Positioning */
+.header-content {
+  position: relative;
+  z-index: 3; /* Ensure header content is above background */
+}
+
+/* Animate Background */
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cube {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(20) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* On mobile screens, ensure navbar takes full width */
+  /* .navbar {
+    width: 100%;
+    height: auto;
+    position: fixed; 
+  } */
+
+  
+
+  nav {
+    display: none; /* Hide nav links on mobile if necessary */
+  }
+
+  .header-content {
+    margin-top: 20%; /* Adjust margin for better visibility on mobile */
+  }
+
+  .search-filter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input {
+    margin-right: 0;
+    margin-bottom: 10px;
+    max-width: none;
+  }
+
+  .filter-select {
+    max-width: none;
+  }
+}
+
+.treeview {
+  background-color: #2e2e2e;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  max-width: 300px;
+  overflow-y: auto;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
+}
+
+.node-label {
+  cursor: pointer;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.node-label:hover {
+  background-color: #444;
+}
+
+.toggle-button {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.expanded {
+  transform: rotate(90deg);
+}
+
+/* Ensure all elements are displayed in one line */
+.header {
+    display: flex;
+    justify-content: space-between; /* Space out the elements */
+    align-items: center;
+    padding: 10px;
+    background-color: #333; /* Adjust based on your design */
+}
+
+.search-bar {
+    flex: 1; /* Search bar takes most of the space */
+    padding: 5px;
+    font-size: 16px;
+    margin-right: 10px; /* Space between search bar and dropdown */
+}
+
+.dropdown {
+    padding: 5px;
+    font-size: 16px;
+    margin-right: 10px; /* Space between dropdown and toggle button */
+}
+
+.toggle-btn {
+    padding: 10px;
+    background-color: #fff; /* Adjust color to your needs */
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Styling the dropdown menu */
+.dropdown {
+    appearance: none; /* Hide default appearance */
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Optional: Dropdown hover effect */
+.dropdown:hover {
+    background-color: #e2e2e2;
+}
+/* Search and Filter UI */
+.search-filter {
+  display: flex;
+  /* justify-content: space-between;  */
+  align-items: center; /* Center vertically */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  position: relative; /* Position relative to parent */
+  z-index: 3; /* Ensure search bar is above background */
+  /* background-color: rgba(0, 0, 0, 0.5);  */
+}
+
+/* Search Input */
+.search-input {
+  margin-left: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px; /* Space between search input and toggle button */
+  flex: 0 1 auto; /* Prevent resizing, maintain size */
+  max-width: 400px; /* Increase max width if needed */
+  background-color: rgba(255, 255, 255, 0.8); /* Light background for visibility */
+  color: #333; 
+}
+
+/* Toggle Button */
+.toggle-button {
+  width: 30px; /* Keep the size of toggle button fixed */
+  height: 30px;
+  cursor: pointer;
+  margin-left: auto; /* Space between search input and toggle button */
+}
+
+/* Dropdown for search results */
+.search-results-dropdown {
+  margin-left: 100px;
+  max-width: 215px;
+  border-radius: 4px;
+  background-color: white;
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  /* background-color: rgba(255, 255, 255, 0.8);  */
+  color: #333; 
+  position: absolute; /* Ensure it's positioned relative to the closest positioned ancestor */
+  z-index: 3; /* Higher z-index to ensure it appears above other elements */
+  /* background-color: white; */
+  border: 1px solid #ccc; /* Optional: add a border for better visibility */
+  max-height: 200px; /* Optional: limit height for better UI */
+  overflow-y: auto; /* Optional: allow scrolling if there are many items */
+  width: 100%; /* Match the width of the search input */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #f0f0f0; /* Highlight on hover */
+}
+.fiselectlter-{
+  border-radius: 4px;
+  display: flex;
+  /* justify-content: space-between;  */
+  align-items: center; /* Center vertically */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  position: relative; /* Position relative to parent */
+  z-index: 3; /* Ensure search bar is above background */
+  /* background-color: rgba(0, 0, 0, 0.5);  */
+}
+.dropdown-content{
+  border-radius: 4px;
+  width: auto;
+  display: flex;
+  /* justify-content: space-between;  */
+  align-items: center; /* Center vertically */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  position: relative; /* Position relative to parent */
+  z-index: 3; /* Ensure search bar is above background */
+}
+.dropdown {
+  position: relative;
+  width: 200px; /* This will control the width of both the select and the dropdown */
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Ensure the dropdown options are the same width */
+.dropdown-select option {
+  width: 100%;
+}
+
+/* Optional: Focus style */
+.dropdown-select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.selected-option {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  /* Ensure navbar takes full width on mobile */
+  .navbar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+  }
+
+  /* Adjust the search filter layout for mobile screens */
+  .search-filter {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row; /* Keep elements in a row */
+    justify-content: space-between; /* Add space between elements */
+    align-items: center; /* Vertically center the items */
+    padding: 10px; /* Add padding for mobile devices */
+  }
+
+  /* Search input: reduce width on mobile */
+  .search-input {
+    padding: 10px;
+    font-size: 16px;
+    width: 50%; /* Take 50% of the width */
+    margin-bottom: 0; /* Remove bottom margin */
+    background-color: rgba(255, 255, 255, 0.9); /* Increase visibility */
+  }
+
+  /* Adjust the category select dropdown */
+  .filter-select {
+    width: 30%; /* Reduce width for mobile */
+    margin-bottom: 0; /* Remove space below */
+  }
+
+  /* Toggle button */
+  /* .toggle-button { */
+    /* width: 15%;  */
+    /* padding: 10px;  */
+  /* } */
+
+  /* Search result dropdown on mobile */
+  .search-results-dropdown {
+    flex-direction: row; 
+    margin-left: 110px;
+    padding: 10px;
+    font-size: 16px;
+    width: 43%; /* Take 50% of the width */
+    /* margin-bottom: 0;  */
+    background-color: rgba(255, 255, 255, 0.9); /* Increase visibility */
+    /* margin-left: 0;  */
+    /* max-width: 100%;  */
+  }
+}
+
+/* General adjustments for mobile headers */
+.header-content {
+  margin-top: 15%; /* Adjust margin for better fit on mobile */
+  text-align: center; /* Center-align the header content */
+}

@@ -1,0 +1,27 @@
+version: "3"
+services:
+  mongo_db:
+    container_name: databasec
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+    ports:
+      - "27017:27017"  # Exposing MongoDB port
+
+  appbackend:
+    build:
+      context: ./la  # Path to the backend Dockerfile
+    ports:
+      - "5000:5000"  # Port for the backend
+    environment:
+      MONGO_URI: mongodb://mongo_db:27017/warehouse  # MongoDB connection string
+
+  appfrontend:
+    build:
+      context: ./bla  # Path to the frontend Dockerfile
+    ports:
+      - "80:80"  # Port for serving the frontend
+
+volumes:
+  mongo_db:
