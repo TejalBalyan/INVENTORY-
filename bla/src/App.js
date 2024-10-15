@@ -6,6 +6,9 @@ import { buildTree } from "./utils/buildTree";
 import './App.css';
 import toggleIcon from './toggle-icon.png';
 
+const API_ITEMS_URL = 'http://localhost:5000/api/items';
+const API_LOCATIONS_URL = 'http://localhost:5000/api/locations';
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -36,76 +39,25 @@ const App = () => {
     };
   }, []);
 
-  // Hard-coded items and locations data
-  const items = [
-    {
-      _id: "670a06c2b0a5787da5ad5f36",
-      item_id: "4ce59062eadd4d4ca5e105f30a9f7256",
-      name: "Black&DeckerScrewdriveR",
-      quantity: 339,
-      category: "Tools",
-      price: 448.43,
-      status: "in_stock",
-      godown_id: "7579aa5649484332ab86c0b52f2b3222",
-      brand: "Black&Decker",
-      attributes: {
-        image_url: "https://m.media-amazon.com/images/I/41-T3GBGYUL.jpg"
-      }
-    },
-    {
-      _id: "670a06c2b0a5787da5ad5f37",
-      item_id: "663a9d18f1894f6e874f7cedd135e248",
-      name: "Samsungphone",
-      quantity: 111,
-      category: "Electronics",
-      price: 102.4,
-      status: "in_stock",
-      godown_id: "e06d51d013ab47d791d90f0ea097cc66",
-      brand: "Samsung",
-      attributes: {
-        image_url: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-f62.jpg"
-      }
-    }
-  ];
-
-  const locations = [
-    {
-      _id: "670a12c1b0a5787da5ad5f4a",
-      id: "d72518e97c3f4a68979153f2b8e9308e",
-      name: "TorresWarehouse",
-      parent_godown: null
-    },
-    {
-      _id: "670a12c1b0a5787da5ad5f4b",
-      id: "a6565c19ccbb4bb8a2a04130a14988db",
-      name: "WesternCenter",
-      parent_godown: "d72518e97c3f4a68979153f2b8e9308e"
-    },
-    {
-      _id: "670a12c1b0a5787da5ad5f4c",
-      id: "4ce59062eadd4d4ca5e105f30a9f7256",
-      name: "Sector60",
-      parent_godown: "a6565c19ccbb4bb8a2a04130a14988db"
-    },
-    {
-      _id: "670a12c1b0a5787da5ad5f4d",
-      id: "e06d51d013ab47d791d90f0ea097cc66",
-      name: "Sector77",
-      parent_godown: "a6565c19ccbb4bb8a2a04130a14988db"
-    },
-    {
-      _id: "670a12c1b0a5787da5ad5f4e",
-      id: "7579aa5649484332ab86c0b52f2b3222",
-      name: "WesternStockpile",
-      parent_godown: "d72518e97c3f4a68979153f2b8e9308e"
-    }
-  ];
-
   useEffect(() => {
-    // Set hard-coded data to state
-    setItemsData(items);
-    const nestedLocations = buildTree(locations, items);
-    setLocationsData(nestedLocations);
+    const fetchData = async () => {
+      try {
+        const itemsResponse = await fetch(API_ITEMS_URL);
+        if (!itemsResponse.ok) throw new Error('Failed to fetch items');
+        const items = await itemsResponse.json();
+        setItemsData(items);
+
+        const locationsResponse = await fetch(API_LOCATIONS_URL);
+        if (!locationsResponse.ok) throw new Error('Failed to fetch locations');
+        const locations = await locationsResponse.json();
+        const nestedLocations = buildTree(locations, items);
+        setLocationsData(nestedLocations);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleSearchChange = (e) => {
@@ -175,7 +127,7 @@ const App = () => {
           <div className="search-results-dropdown">
             {filteredItems.map(item => (
               <div 
-                key={item.item_id} 
+                key={item.id} 
                 className="search-result-item"
                 onClick={() => handleSelectItem(item)} // Select item when clicked
               >
